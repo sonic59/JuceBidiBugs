@@ -232,7 +232,7 @@ void TextLayout::createLayout (const AttributedString& text, float maxWidth)
     if (! createNativeLayout (text))
         createStandardLayout (text);
 
-    recalculateWidth();
+    recalculateWidth(text);
 }
 
 //==============================================================================
@@ -600,9 +600,9 @@ void TextLayout::createStandardLayout (const AttributedString& text)
     l.createLayout (text, *this);
 }
 
-void TextLayout::recalculateWidth()
+void TextLayout::recalculateWidth(const AttributedString& text)
 {
-    if (lines.size() > 0)
+    if (lines.size() > 0 && text.getReadingDirection() != AttributedString::rightToLeft)
     {
         Range<float> range (lines.getFirst()->getLineBoundsX());
 
