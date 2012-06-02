@@ -203,6 +203,16 @@ namespace CoreTextTypeLayout
             default:                                    jassertfalse; break; // Illegal justification flags
         }
 
+        if (text.getReadingDirection() == AttributedString::rightToLeft)
+        {
+            switch (text.getJustification().getOnlyHorizontalFlags())
+            {
+                case Justification::left:                   ctTextAlignment = kCTRightTextAlignment; break;
+                case Justification::right:                  ctTextAlignment = kCTLeftTextAlignment; break;
+                default:                                    break;
+            }
+        }
+
         switch (text.getWordWrap())
         {
             case AttributedString::byWord:      break;
